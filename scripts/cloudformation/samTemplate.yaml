@@ -6,6 +6,9 @@ Parameters:
   Author:
     Type: String
     Description: Author of this Lambda.
+  LambdaRoleArn:
+    Type: String
+    Description: Lambda role ARN to be used for all lambdas
 Resources:
   UploadToS3Lambda:
     Type: AWS::Serverless::Function
