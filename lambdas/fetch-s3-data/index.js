@@ -1,9 +1,11 @@
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
+//process.env.Author
 
 exports.handler = (event, context, callback) => {
     
     console.log("Got event : " + JSON.stringify(event));
+    console.log("Env variable author : " + process.env.Author);
 
     var bucket = event.params.path.bucket;
 
@@ -47,7 +49,7 @@ exports.handler = (event, context, callback) => {
                         body: JSON.stringify(S3ObjectKeys)
                     };
             
-                    callback(null, response);
+                    callback(null, response); 
                 }
                 else {
                     const response = {
