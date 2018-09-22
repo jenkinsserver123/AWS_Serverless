@@ -58,8 +58,8 @@ exports.handler = (event, context, callback) => {
                             
 
                     });
-                    
-                    s3.deleteObject(deleteParams, function(err, data) {
+                    console.log("Delete Params : " + JSON.stringify(deleteParams));
+                    s3.deleteObjects(deleteParams, function(err, data) {
                         if (err) {
                             console.log("Error occured deleting files from S3" + err);
                             const response = {
