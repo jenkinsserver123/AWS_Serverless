@@ -26,7 +26,6 @@ Resources:
       Tags:
         project: aws-serverless-demo
         type: lambda
-Resources:
   DeleteFromS3Lambda:
     Type: AWS::Serverless::Function
     Properties:
