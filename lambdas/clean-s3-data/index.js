@@ -58,26 +58,38 @@ exports.handler = (event, context, callback) => {
                             
 
                     });
-                    console.log("Delete Params : " + JSON.stringify(deleteParams));
-                    s3.deleteObjects(deleteParams, function(err, data) {
-                        if (err) {
-                            console.log("Error occured deleting files from S3" + err);
-                            const response = {
-                                statusCode: 500,
-                                body: JSON.stringify('Error deleting files from S3!')
-                            };
                     
-                            callback(null, response);
-                        }
-                        else {
-                            console.log("Files successfully delete from S3. Response : " + JSON.stringify(data));           // successful response
-                            const response = {
-                                statusCode: 200,
-                                body: JSON.stringify(S3ObjectKeysToDelete)
-                            };
-                            callback(null, response); 
-                        }    
-                    });
+                    if(S3ObjectKeysToDelete.length > 0 ){
+                        console.log("Delete Params : " + JSON.stringify(deleteParams));
+                        s3.deleteObjects(deleteParams, function(err, data) {
+                            if (err) {
+                                console.log("Error occured deleting files from S3" + err);
+                                const response = {
+                                    statusCode: 500,
+                                    body: JSON.stringify('Error deleting files from S3!')
+                                };
+                        
+                                callback(null, response);
+                            }
+                            else {
+                                console.log("Files successfully delete from S3. Response : " + JSON.stringify(data));           // successful response
+                                const response = {
+                                    statusCode: 200,
+                                    body: JSON.stringify(S3ObjectKeysToDelete)
+                                };
+                                callback(null, response); 
+                            }    
+                        });
+                    }
+                    else {
+                        console.log("No files to delete");           // successful response
+                        const response = {
+                            statusCode: 200,
+                            body: "No files to delete"
+                        };
+                        callback(null, response);                        
+                    }
+
 
 
                 }
