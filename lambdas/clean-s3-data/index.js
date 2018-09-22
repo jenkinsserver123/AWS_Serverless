@@ -70,7 +70,7 @@ exports.handler = (event, context, callback) => {
                             callback(null, response);
                         }
                         else {
-                            console.log("Files successfully delete from S3. Response : " + data);           // successful response
+                            console.log("Files successfully delete from S3. Response : " + JSON.stringify(data));           // successful response
                             const response = {
                                 statusCode: 200,
                                 body: JSON.stringify(S3ObjectKeysToDelete)
