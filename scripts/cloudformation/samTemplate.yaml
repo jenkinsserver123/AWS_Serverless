@@ -26,3 +26,20 @@ Resources:
       Tags:
         project: aws-serverless-demo
         type: lambda
+Resources:
+  DeleteFromS3Lambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs6.10
+      CodeUri: ../../lambdas/clean-s3-data/clean-s3-data.zip
+      Role: !Ref LambdaRoleArn
+      FunctionName: clean-s3-data
+      Timeout: 120
+      MemorySize: 128
+      Environment:
+        Variables:
+          Author: !Ref Author
+      Tags:
+        project: aws-serverless-demo
+        type: lambda
