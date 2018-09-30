@@ -1,0 +1,140 @@
+{
+  "Comment": "Processes File uploaded to S3 in AWS serverless demo",
+  "StartAt": "EvalUpload",
+  "States": {
+    "EvalUpload": {
+      "Type": "Task",
+      "Comment": "Evaluates uploaded files to S3",
+      "InputPath": "$",
+      "ResultPath": "$.result",
+      "Resource": "TO_REPLACE",
+      "Next": "ProcessAllFileTypes",
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 1
+        }
+      ]
+    },
+    "ProcessAllFileTypes": {
+      "Type": "Parallel",
+      "Comment": "Process different file types separately",
+      "Branches": [
+        {
+          "StartAt": "ProcessJpgFileChoice",
+          "States": {
+            "ProcessJpgFileChoice": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Variable": "$.result.isJpg",
+                  "BooleanEquals": true,
+                  "Next": "ProcessJpgFile"
+                },
+                {
+                  "Variable": "$.result.isJpg",
+                  "BooleanEquals": false,
+                  "Next": "Done"
+                }
+              ]
+            },
+            "ProcessJpgFile" : {
+              "Type": "Task",
+              "Comment": "Processes JPG file",
+              "InputPath": "$",
+              "ResultPath": "$",
+              "Resource": "TO_REPLACE",
+              "End": true
+            },
+            "Done": {
+              "Type": "Succeed"
+            }
+          }
+        },
+        {
+          "StartAt": "ProcessPngFileChoice",
+          "States": {
+            "ProcessPngFileChoice": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Variable": "$.result.isPng",
+                  "BooleanEquals": true,
+                  "Next": "ProcessPngFile"
+                },
+                {
+                  "Variable": "$.result.isPng",
+                  "BooleanEquals": false,
+                  "Next": "Done"
+                }
+              ]
+            },
+            "ProcessPngFile" : {
+              "Type": "Task",
+              "Comment": "Processes Png file",
+              "InputPath": "$",
+              "ResultPath": "$",
+              "Resource": "TO_REPLACE",
+              "End": true
+            },
+            "Done": {
+              "Type": "Succeed"
+            }
+          }
+        },
+        {
+          "StartAt": "ProcessGifFileChoice",
+          "States": {
+            "ProcessGifFileChoice": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Variable": "$.result.isGif",
+                  "BooleanEquals": true,
+                  "Next": "ProcessGifFile"
+                },
+                {
+                  "Variable": "$.result.isGif",
+                  "BooleanEquals": false,
+                  "Next": "Done"
+                }
+              ]
+            },
+            "ProcessGifFile" : {
+              "Type": "Task",
+              "Comment": "Processes Gif file",
+              "InputPath": "$",
+              "ResultPath": "$",
+              "Resource": "TO_REPLACE",
+              "End": true
+            },
+            "Done": {
+              "Type": "Succeed"
+            }
+          }
+        }       
+      ],
+      "Next": "DoCleanup",
+      "InputPath": "$"
+    },
+    "DoCleanup": {
+      "Type": "Task",
+      "Comment": "Do post processing cleanup if any",
+      "InputPath": "$",
+      "Resource": "To_REPLACE",
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 1
+        }
+      ],
+      "End": true
+    }
+  }
+}
