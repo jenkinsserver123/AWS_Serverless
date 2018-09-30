@@ -14,6 +14,11 @@ exports.handler = (event, context, callback) => {
   var result = {};
   result.bucket = bucket;
   result.key = key;
+
+  result.isJpg = false;
+  result.isPng = false;
+  result.isGif = false;
+
   if(key.endsWith(".jpg")){
     result.isJpg = true;
   }
