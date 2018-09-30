@@ -7,8 +7,8 @@ exports.handler = (event, context, callback) => {
   console.log("Got event : " + JSON.stringify(event));
   console.log("Env variable author : " + process.env.Author);
 
-  var bucket = event.bucket;
-  var key = event.key;
+  var bucket = event.srcBucket;
+  var key = event.srcKey;
   console.log("bucket " + bucket + " key : " + key);
 
   var result = {};
