@@ -7,7 +7,7 @@
       "Comment": "Evaluates uploaded files to S3",
       "InputPath": "$",
       "ResultPath": "$.result",
-      "Resource": "TO_REPLACE",
+      "Resource": "arn:aws:lambda:us-east-1:499222264523:function:eval-upload",
       "Next": "ProcessAllFileTypes",
       "Retry": [
         {
@@ -37,7 +37,7 @@
                 {
                   "Variable": "$.result.isJpg",
                   "BooleanEquals": false,
-                  "Next": "Done"
+                  "Next": "DoneJpg"
                 }
               ]
             },
@@ -46,10 +46,10 @@
               "Comment": "Processes JPG file",
               "InputPath": "$",
               "ResultPath": "$",
-              "Resource": "TO_REPLACE",
+              "Resource": "arn:aws:lambda:us-east-1:499222264523:function:process-jpg",
               "End": true
             },
-            "Done": {
+            "DoneJpg": {
               "Type": "Succeed"
             }
           }
@@ -68,7 +68,7 @@
                 {
                   "Variable": "$.result.isPng",
                   "BooleanEquals": false,
-                  "Next": "Done"
+                  "Next": "DonePng"
                 }
               ]
             },
@@ -77,10 +77,10 @@
               "Comment": "Processes Png file",
               "InputPath": "$",
               "ResultPath": "$",
-              "Resource": "TO_REPLACE",
+              "Resource": "arn:aws:lambda:us-east-1:499222264523:function:process-png",
               "End": true
             },
-            "Done": {
+            "DonePng": {
               "Type": "Succeed"
             }
           }
@@ -99,7 +99,7 @@
                 {
                   "Variable": "$.result.isGif",
                   "BooleanEquals": false,
-                  "Next": "Done"
+                  "Next": "DoneGif"
                 }
               ]
             },
@@ -108,10 +108,10 @@
               "Comment": "Processes Gif file",
               "InputPath": "$",
               "ResultPath": "$",
-              "Resource": "TO_REPLACE",
+              "Resource": "arn:aws:lambda:us-east-1:499222264523:function:process-gif",
               "End": true
             },
-            "Done": {
+            "DoneGif": {
               "Type": "Succeed"
             }
           }
@@ -124,7 +124,7 @@
       "Type": "Task",
       "Comment": "Do post processing cleanup if any",
       "InputPath": "$",
-      "Resource": "To_REPLACE",
+      "Resource": "arn:aws:lambda:us-east-1:499222264523:function:post-process-cleanup",
       "Retry": [
         {
           "ErrorEquals": [
