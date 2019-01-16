@@ -1,7 +1,7 @@
 {
   "Parameters": {
     "Author": "jenkinsserver123",
-    "LambdaRoleArn": "arn:aws:iam::990356577040:role/custom_cfservicerole",
+    "LambdaRoleArn": "arn:aws:iam::990356577040:role/lamdas3",
     "StateMachineARN": "arn:aws:states:us-east-1:499222264523:stateMachine:aws-serverless-process-upload"
   }
 }
