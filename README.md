@@ -1,5 +1,5 @@
 # AWS Serverless Web application
-This repository is the sample example that covers a complete web app built with AWS serverless architecture. If you wish to go through the summary of this take a look at [Building a web application using AWS serverless architecture](http://opensourceforgeeks.blogspot.com/2018/10/building-web-application-using-aws.html)
+This repository is the sample example that covers a complete web app built with AWS serverless architecture. If you wish to go through the summary of this take a look at [Building a web application using AWS serverless architecture](http://opensourceforgeeks.blogspot.com/2018/10/building-web-application-using-aws.html) .
 
 ## AWS Services covered
 
